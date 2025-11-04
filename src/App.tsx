@@ -2,18 +2,18 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { useAuthStore } from './src/store/useAuthStore';
-import { AuthStack } from './src/navigation/AuthStack';
-import { AppNavigator } from './src/navigation/AppNavigator';
+import { useAuthStore } from './store/useAuthStore';
+import { AuthStack } from './navigation/AuthStack';
+import { AppNavigator } from './navigation/AppNavigator';
 
 export default function App() {
-  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
+  const user = useAuthStore((s) => s.user);
 
   return (
     <SafeAreaProvider>
       <StatusBar barStyle="dark-content" />
       <NavigationContainer>
-        {isAuthenticated ? <AppNavigator /> : <AuthStack />}
+        {user ? <AppNavigator /> : <AuthStack />}
       </NavigationContainer>
     </SafeAreaProvider>
   );
